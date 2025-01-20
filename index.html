@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Invoice Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login/Signup Section -->
+        <section id="auth-section" class="section">
+            <div class="auth-container">
+                <h1>AI Invoice Creator</h1>
+                <div class="auth-forms">
+                    <form id="loginForm" class="auth-form">
+                        <h2>Login</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+                        <div id="g_id_onload"
+                             data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleGoogleSignIn"
+                             data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin google-btn"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="signin_with"
+                             data-size="large"
+                             data-logo_alignment="left">
+                        </div>
+                    </form>
+                    <form id="signupForm" class="auth-form hidden">
+                        <h2>Sign Up</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Confirm Password" required>
+                        <button type="submit">Sign Up</button>
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+                        <div class="g_id_signin google-btn"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="signup_with"
+                             data-size="large"
+                             data-logo_alignment="left">
+                        </div>
+                    </form>
+                    <p class="auth-toggle">Don't have an account? <a href="#" id="toggleAuth">Sign Up</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main App Section -->
+        <section id="app-section" class="section hidden">
+            <!-- Header -->
+            <header>
+                <div class="logo">AI Invoice Creator</div>
+                <nav>
+                    <button id="settingsBtn"><i class="fas fa-cog"></i></button>
+                    <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
+                </nav>
+            </header>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button id="voiceInputBtn" class="primary-btn">
+                        <i class="fas fa-microphone"></i> Voice Input
+                    </button>
+                    <button id="createInvoiceBtn" class="primary-btn">
+                        <i class="fas fa-plus"></i> Create Invoice
+                    </button>
+                </div>
+
+                <!-- Invoice Form -->
+                <div id="invoiceForm" class="hidden">
+                    <h2>Create Invoice</h2>
+                    <form>
+                        <div class="form-group">
+                            <label>Customer Name</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Items</label>
+                            <div id="itemsList">
+                                <div class="item-row">
+                                    <input type="text" placeholder="Item name" required>
+                                    <input type="number" placeholder="Quantity" required>
+                                    <input type="number" placeholder="Price" required>
+                                    <button type="button" class="remove-item"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" id="addItemBtn">Add Item</button>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea id="notes"></textarea>
+                        </div>
+                        <button type="submit" class="primary-btn">Generate Invoice</button>
+                    </form>
+                </div>
+
+                <!-- Settings Panel -->
+                <div id="settingsPanel" class="hidden">
+                    <h2>Business Settings</h2>
+                    <form id="businessSettingsForm">
+                        <div class="form-group">
+                            <label>Business Name</label>
+                            <input type="text" id="businessName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Logo</label>
+                            <input type="file" id="businessLogo" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea id="businessAddress" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>GSTIN</label>
+                            <input type="text" id="gstin">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <button type="submit" class="primary-btn">Save Settings</button>
+                    </form>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
